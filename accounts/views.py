@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from accounts.forms import UserForm
 from accounts.models import User, UserProfile
-from django.contrib import messages
+from django.contrib import messages, auth
 from vendor.forms import VendorForm
 
 # Create your views here.
@@ -48,3 +48,23 @@ def registerVendor(request):
         'v_form':v_form,
     }
     return render(request, 'accounts/register-restaurant.html', context)
+
+def login(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        user = auth.authenticate(email=email, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            messages.success(request, "you just login")
+        else:
+            messages.error(request, 'login error')
+            return redirect('login')
+        
+    return render(request, 'accounts/login.html')
+
+def logout(request):
+    auth.logout(request)
+    messages.info(request, 'you just logged out')
+    return redirect('login')
