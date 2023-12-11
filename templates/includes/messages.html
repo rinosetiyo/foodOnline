@@ -1,0 +1,10 @@
+{% if messages %}
+<li>
+  <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 alert alert-success alert-dismissible fade show" role="alert">
+    {% for message in messages %}
+      <strong>{{ message }}</strong> After register, you could login
+    {% endfor %}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+</li>
+{% endif %}
