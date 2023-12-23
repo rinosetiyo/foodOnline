@@ -17,11 +17,10 @@ def detectUser(user):
         redirectUrl = '/admin'
         return redirectUrl
     
-def send_verification_email(request, user):
+def send_verification_email(request, user, mail_subject, email_templates):
     from_email = settings.DEFAULT_FROM_EMAIL
     current_site = get_current_site(request)
-    mail_subject = 'Please activate your account'
-    message = render_to_string('accounts/emails/account_verification_email.html', {
+    message = render_to_string(email_templates, {
         'user': user,
         'domain': current_site,
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
