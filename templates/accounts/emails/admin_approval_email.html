@@ -1,0 +1,10 @@
+{% autoescape off %}
+
+hi {{user.first_name}},
+{% if is_approved %}
+congratulation you have been approved
+{% else %}
+your approval is failed
+{% endif %}
+
+{% endautoescape %}

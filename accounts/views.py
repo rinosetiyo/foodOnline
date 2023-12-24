@@ -89,8 +89,8 @@ def registerVendor(request):
 
             # send verification email
             mail_subject = "activation email"
-            email_templates = "accounts/emails/account_verification_email.html"
-            send_verification_email(request, user, mail_subject, email_templates)
+            email_template = "accounts/emails/account_verification_email.html"
+            send_verification_email(request, user, mail_subject, email_template)
 
             messages.success(request, "you just registered as VENDOR")
             return redirect('registerVendor')
@@ -148,8 +148,8 @@ def forget_password(request):
             user = User.objects.get(email__exact=email)
 
             mail_subject = "reset password"
-            email_templates = "accounts/emails/reset_password.html"
-            send_verification_email(request, user, mail_subject, email_templates)
+            email_template = "accounts/emails/reset_password.html"
+            send_verification_email(request, user, mail_subject, email_template)
 
             messages.success(request, 'password reset link has been send')
             return redirect('login')
