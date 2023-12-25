@@ -42,7 +42,9 @@ def registerUser(request):
             user.save()
 
             # send verification email
-            send_verification_email(request, user)
+            mail_subject = "activation email"
+            email_template = "accounts/emails/account_verification_email.html"
+            send_verification_email(request, user, mail_subject, email_template)
 
             messages.success(request,'you just registered as CUSTOMER')
             return redirect('registerUser')
@@ -88,7 +90,7 @@ def registerVendor(request):
             vendor.save()
 
             # send verification email
-            mail_subject = "activation email"
+            mail_subject = "vendor activation email"
             email_template = "accounts/emails/account_verification_email.html"
             send_verification_email(request, user, mail_subject, email_template)
 
@@ -112,7 +114,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, "you just login")
-            return redirect('myAccount')
+            return redirect('login')
         else:
             messages.error(request, 'login error')
             return redirect('login')
@@ -124,21 +126,21 @@ def logout(request):
     messages.info(request, 'you just logged out')
     return redirect('login')
 
-@login_required(login_url='login')
-def myAccount(request):
-    user = request.user
-    redirectUrl = detectUser(user)
-    return redirect(redirectUrl)
+# @login_required(login_url='login')
+# def myAccount(request):
+#     user = request.user
+#     redirectUrl = detectUser(user)
+#     return redirect(redirectUrl)
 
-@login_required(login_url='login')
-@user_passes_test(check_role_vendor)
+# @login_required(login_url='login')
+# @user_passes_test(check_role_vendor)
 def vendorDashboard(request):
-    return render(request, 'vendors/vendor-dashboard.html')
+    return render(request, 'vendors/restaurant-dashboard.html')
 
-@login_required(login_url='login')
-@user_passes_test(check_role_customer)
+# @login_required(login_url='login')
+# @user_passes_test(check_role_customer)
 def custDashboard(request):
-    return render(request, 'customers/customer-dashboard.html')
+    return render(request, 'customers/buyer-dashboard.html')
 
 def forget_password(request):
     if request.method == 'POST':
@@ -179,7 +181,7 @@ def reset_password(request):
         confirm_password = request.POST['confirm_password']
 
         if password == confirm_password:
-            pk = request.session('uid')
+            pk = request.session.get('uid')
             user = User.objects.get(pk=pk)
             user.set_password(password)
             user.is_active = True
@@ -189,4 +191,4 @@ def reset_password(request):
         else:
             messages.error(request, 'password do not match')
             return redirect('reset_password')
-    return render(request, 'accounts/reset_password.html')
+    return render(request, 'accounts/new_reset_password.html')

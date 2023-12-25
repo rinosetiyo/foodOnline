@@ -5,4 +5,4 @@ from vendor.models import Vendor
 class VendorForm(forms.ModelForm):
     class Meta:
         model = Vendor
-        fields = ['vendor_name', 'vendor_license']
+        fields = ['profile_picture','cover_photo','vendor_name', 'vendor_license']
