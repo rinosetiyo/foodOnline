@@ -1,4 +1,3 @@
-from typing import Any
 from django import forms
 from accounts.models import User, UserProfile
 
@@ -22,6 +21,7 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     profile_picture = forms.ImageField(widget=forms.FileInput())
     cover_photo = forms.ImageField(widget=forms.FileInput())
+
     class Meta:
         model = UserProfile
         fields = ['profile_picture','cover_photo', 'address_line_1', 'address_line_2', 'country', 'state','pin_code', 'latitude','longitude']
