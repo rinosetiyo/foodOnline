@@ -48,7 +48,7 @@
 									<ul>
 										<li class=""><a href="{% url "vendorDashboard" %}"><i class="icon-dashboard3"></i>Dashboard</a></li>
 										<li class="active"><a href="{% url "vprofile" %}"><i class="icon-building"></i>My Restaurant</a></li>
-										<li><a href="restaurant-menu-builder.html"><i class="icon-menu5"></i>Menu Builder</a></li>
+										<li><a href="{% url "menu_builder" %}"><i class="icon-menu5"></i>Menu Builder</a></li>
 										<li><a href="restaurant-orders.html"><i class="icon-add_shopping_cart"></i>Orders</a></li>
 										<li><a href="restaurant-earnings.html"><i class="icon-money"></i>Earnings</a></li>
 										<li><a href="restaurant-statement.html"><i class="icon-file-text22"></i>Statement</a></li>
@@ -87,7 +87,6 @@
 																	<div class="upload-gallery">
 																		{{profile_form.profile_picture}}
 																	</div>
-                                                                    {{ profile_form.profile_picture.errors }}
 																</div>
 															</div>
 														</div>
@@ -109,8 +108,6 @@
 																	<div class="upload-gallery">
 																		{{profile_form.cover_photo}}
 																	</div>
-                                                                    {{ profile_form.cover_photo.errors }}
-																	
 																</div>
 															</div>
 														</div>
@@ -132,8 +129,6 @@
 																	<div class="upload-gallery">
 																		{{vendor_form.vendor_license}}
 																	</div>
-                                                                    {{vendor_form.vendor_license.errors}}
-																	
 																</div>
 															</div>
 														</div>
@@ -181,13 +176,17 @@
 														</div>
 													</div>
 												</li>
+													{% comment %} {% for error in profile_form.errors %}
+														<span class="error">{{ error }}</span>
+													{% endfor %}
+													{% for error in vendor_form.errors %}
+														<span class="error">{{ error }}</span>
+													{% endfor %} {% endcomment %}
 											</ul>
-                                            {{ profile_form.errors }}
-                                            {{ vendor_form.errors }}
 											<div>
 												<div class="field-holder">
 													<div class="payment-holder input-button-loader">
-														<input class="update-restaurant" type="submit" value="Update Restaurant" onclick="location.href='restaurant-location.html';">
+														<input class="update-restaurant" type="submit" value="Update Restaurant">
 													</div>
 												</div>
 											</div>

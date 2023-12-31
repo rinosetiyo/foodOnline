@@ -1,9 +1,20 @@
 from django.contrib import admin
-from vendor.models import Vendor
+from vendor.models import Vendor, Category, FoodItem
 from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
-# class CustomVendorAdmin(UserAdmin):
-#     list_display = ('username', 'vendor_name', 'vendor_license', 'is_approved')
+class CustomVendorAdmin(admin.ModelAdmin):
+    list_display = ('vendor_name', 'vendor_license', 'is_approved')
+    list_editable = ('is_approved',)
 
-admin.site.register(Vendor)
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('category_name',)}
+    list_display = ('category_name','vendor','updated_at')
+    search_fields = ('category_name',)
+
+class FoodItemAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('food_title',)}
+
+admin.site.register(Vendor, CustomVendorAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(FoodItem, FoodItemAdmin)
