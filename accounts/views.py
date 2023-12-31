@@ -114,7 +114,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, "you just login")
-            return redirect('login')
+            return redirect('myAccount')
         else:
             messages.error(request, 'login error')
             return redirect('login')
@@ -126,19 +126,19 @@ def logout(request):
     messages.info(request, 'you just logged out')
     return redirect('login')
 
-# @login_required(login_url='login')
-# def myAccount(request):
-#     user = request.user
-#     redirectUrl = detectUser(user)
-#     return redirect(redirectUrl)
+@login_required(login_url='login')
+def myAccount(request):
+    user = request.user
+    redirectUrl = detectUser(user)
+    return redirect(redirectUrl)
 
-# @login_required(login_url='login')
-# @user_passes_test(check_role_vendor)
+@login_required(login_url='login')
+@user_passes_test(check_role_vendor)
 def vendorDashboard(request):
     return render(request, 'vendors/restaurant-dashboard.html')
 
-# @login_required(login_url='login')
-# @user_passes_test(check_role_customer)
+@login_required(login_url='login')
+@user_passes_test(check_role_customer)
 def custDashboard(request):
     return render(request, 'customers/buyer-dashboard.html')
 

@@ -76,12 +76,19 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
     
+    # for showing dashboard by user role
+    def get_role(self):
+        if self.role == 1:
+            user_role = 'Vendor'
+        elif self.role == 2:
+            user_role = 'Customer'
+        return user_role
+    
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     profile_picture = models.ImageField(upload_to='users/profile_pictures', blank=True, null=True)
     cover_photo = models.ImageField(upload_to='users/cover_photos', blank=True, null=True)
-    address_line_1 = models.CharField(max_length=100, blank=True, null=True)
-    address_line_2 = models.CharField(max_length=100, blank=True, null=True)
+    address = models.CharField(max_length=250, blank=True, null=True)
     country = models.CharField(max_length=100, blank=True, null=True)
     state = models.CharField(max_length=100, blank=True, null=True)
     city = models.CharField(max_length=100, blank=True, null=True)

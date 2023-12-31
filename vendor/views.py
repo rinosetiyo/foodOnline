@@ -14,7 +14,7 @@ def vprofile(request):
     
     if request.method == 'POST':
         profile_form = UserProfileForm(request.POST, request.FILES, instance=profile)
-        vendor_form = VendorForm(request.POST, request.FILES, instance=profile)
+        vendor_form = VendorForm(request.POST, request.FILES, instance=vendor)
         if profile_form.is_valid and vendor_form.is_valid:
             profile_form.save()
             vendor_form.save()
@@ -32,4 +32,4 @@ def vprofile(request):
         'profile_form': profile_form,
         'vendor_form' : vendor_form,
     }
-    return render(request, 'vendor/vprofile.html', context)
+    return render(request, 'vendors/vprofile.html', context)
