@@ -176,12 +176,21 @@
 														</div>
 													</div>
 												</li>
-													{% comment %} {% for error in profile_form.errors %}
-														<span class="error">{{ error }}</span>
+													{% for field in profile_form %}
+														{% if profile_form.errors %}
+															{% for error in profile_form.errors %}
+															<li>{{error}}</li>
+															{% endfor %}
+														{% endif %}
 													{% endfor %}
-													{% for error in vendor_form.errors %}
-														<span class="error">{{ error }}</span>
-													{% endfor %} {% endcomment %}
+
+													{% for field in vendor_form %}
+														{% if vendor_form.errors %}
+															{% for error in vendor_form.errors %}
+															<li>{{error}}</li>
+															{% endfor %}
+														{% endif %}
+													{% endfor %}
 											</ul>
 											<div>
 												<div class="field-holder">

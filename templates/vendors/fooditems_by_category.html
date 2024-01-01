@@ -61,7 +61,7 @@
 						<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 							<div class="user-dashboard loader-holder">
 								<div class="user-holder">
-									<h2>Menu Builder</h2>
+									<h2>Category : {{category.category_name}}</h2>
 									<!-- My Restaurants Form Start -->
 										<div class="form-fields-set">
 											<ul>
@@ -79,11 +79,11 @@
 																			<div>Received</div>
 																			<div>Status</div>
 																		</li>
-																		{% for cat in categories %}
+																		{% for food in fooditems %}
 																		<li class="order-heading-titles">
-																			<div><a href="{% url "fooditems" cat.id %}">{{cat.category_name}}</a></div>
+																			<div><a href="#" data-toggle="modal" data-target="#order-det-22606">{{food.food_title}}</a></div>
 																			<div>Apr 9,2020</div>
-																			<div>£ 38.99</div>
+																			<div>$ {{food.price}}</div>
 																			<div>£ 3.90</div>
 																			<div>£ 35.09</div>
 																			<div>
