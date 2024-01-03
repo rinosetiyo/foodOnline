@@ -72,7 +72,7 @@
 																<div class="responsive-table">
 																	<ul class="table-generic">
 																		<li class="order-heading-titles">
-																			<div>Category Name</div>
+																			<div>Food Items</div>
 																			<div>Date</div>
 																			<div>Total Price</div>
 																			<div>Charges</div>
@@ -87,8 +87,8 @@
 																			<div>£ 3.90</div>
 																			<div>£ 35.09</div>
 																			<div>
-																				<button class="btn btn-warning">Edit</button>
-																				<button class="btn btn-danger">Delete</button>
+																				<a class="btn btn-warning" href="{% url "edit_fooditem" food.id %}">Edit</a>
+																				<a href="{% url "delete_fooditem" food.id %}" class="btn btn-danger">Delete</a>
 																			</div>
 																		</li>
 																		{% endfor %}
@@ -100,7 +100,7 @@
 														</div>
 													</div>
 												</li>
-                                                <button class="btn btn-primary">Add Category</button>
+                                                <a href="{% url "add_fooditem" %}" class="btn btn-primary">Add Food Item</a>
 													
 											</ul>
 											

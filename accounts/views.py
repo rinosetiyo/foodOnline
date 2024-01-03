@@ -8,6 +8,8 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.template.defaultfilters import slugify
+import random as rd
 
 def check_role_vendor(user):
     if user.role == 1:
@@ -66,7 +68,7 @@ def activate(request, uidb64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        messages.success(request, 'Conratulation your account is activated')
+        messages.success(request, 'Congratulation your account is activated')
         # return redirect('myAccount')
         return render(request, 'accounts/emails/activation-completed.html')
     else:
@@ -84,6 +86,8 @@ def registerVendor(request):
             user.set_password(password)
             user.save()
             vendor = v_form.save(commit=False)
+            vendor_name = v_form.cleaned_data['vendor_name']
+            vendor.vendor_slug = slugify(vendor_name)+'-'+str(rd.randint(1,100))
             vendor.user = user
             user_profile = UserProfile.objects.get(user=user)
             vendor.user_profile = user_profile

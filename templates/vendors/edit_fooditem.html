@@ -61,52 +61,32 @@
 						<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 							<div class="user-dashboard loader-holder">
 								<div class="user-holder">
-									<h2>Menu Builder</h2>
+									<h2>Menu Builder : Update</h2>
 									<!-- My Restaurants Form Start -->
+                                    <form action="{% url "edit_fooditem" fooditem.id %}" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
 										<div class="form-fields-set">
-											<ul>
+											{% comment %} <ul>
 												<li>
 													<div class="row">
 														<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-															<div class="user-orders-list">
-																<div class="responsive-table">
-																	<ul class="table-generic">
-																		<li class="order-heading-titles">
-																			<div>Category Name</div>
-																			<div>Date</div>
-																			<div>Total Price</div>
-																			<div>Charges</div>
-																			<div>Received</div>
-																			<div>Status</div>
-																		</li>
-																		{% for cat in categories %}
-																		<li class="order-heading-titles">
-																			<div><a href="{% url "fooditems" cat.id %}">{{cat.category_name}}</a></div>
-																			<div>Apr 9,2020</div>
-																			<div>£ 38.99</div>
-																			<div>£ 3.90</div>
-																			<div>£ 35.09</div>
-																			<div>
-																				<a href="{% url "edit_category" cat.id %}" class="btn btn-warning">Edit</a>
-																				<a href="{% url "delete_category" cat.id %}" class="btn btn-danger">Delete</a>
-																			</div>
-																		</li>
-																		{% endfor %}
-																		
-																	</ul>
-				
-																</div>												
-															</div>
+															<label for="">Category Name</label>
+                                                            {{form.category_name}}
+														</div>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+															<label for="">Description</label>
+                                                            {{form.description}}
 														</div>
 													</div>
 												</li>
-                                                <a href="{% url "add_category" %}" class="btn btn-primary">Add Category</a>
+                                                <button class="btn btn-primary" type="submit">Update Category</button>
 													
-											</ul>
-											
+											</ul> {% endcomment %}
+											{{form}}
+                                            <button class="btn btn-primary" type="submit">Update Food</button>
 										</div>
 									<!-- My Restaurants Form End -->
-
+                                    </form>
 								</div>
 							</div>
 						</div>

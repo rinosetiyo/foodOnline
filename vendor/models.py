@@ -7,6 +7,7 @@ class Vendor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user')
     user_profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE, related_name='user_profile')
     vendor_name = models.CharField(max_length=200, blank=True)
+    vendor_slug = models.SlugField(max_length=200, blank=True, null=True, unique=True)
     vendor_license = models.ImageField(upload_to='vendors/vendor_license', blank=True)
     is_approved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -55,7 +56,7 @@ class Category(models.Model):
     
 class FoodItem(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='fooditem')
     food_title = models.CharField(max_length=250, blank=True, null=True)
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
