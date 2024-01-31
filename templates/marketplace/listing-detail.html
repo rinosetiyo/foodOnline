@@ -72,9 +72,9 @@
 						<div class="categories-menu">
 							<h6><i class="icon-restaurant_menu"></i>Categories</h6>
 							<ul class="menu-list">
-								<li class="active"><a href="#" class="menu-category-link"> Pizzas </a></li>
-								<li class=""><a href="#" class="menu-category-link"> Garlic Bread </a></li>
-								<li class=""><a href="#" class="menu-category-link"> Kebabs </a></li>
+								{% for cat in categories %}
+								<li class=""><a href="#" class="menu-category-link"> {{cat.category_name}} </a></li>
+								{% endfor %}
 							</ul>
 						</div>
 					</div>
