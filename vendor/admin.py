@@ -1,5 +1,5 @@
 from django.contrib import admin
-from vendor.models import Vendor, Category, FoodItem
+from vendor.models import Vendor, Category, FoodItem, Cart
 from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
@@ -15,6 +15,10 @@ class CategoryAdmin(admin.ModelAdmin):
 class FoodItemAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('food_title',)}
 
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('user','fooditem','quantity', 'updated_at')
+
 admin.site.register(Vendor, CustomVendorAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(FoodItem, FoodItemAdmin)
+admin.site.register(Cart, CartAdmin)
