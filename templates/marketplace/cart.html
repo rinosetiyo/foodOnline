@@ -16,12 +16,19 @@
 						<div class="tab-content">
 							<div id="home" class="tab-pane in active">
 								<div class="menu-itam-holder">
+									<div id="empty-cart" class="menu-itam-list" style="display: none;">
+										<ul>
+											<li>
+												<h1 class="text-center">Cart Empty</h1>
+											</li>
+										</ul>
+									</div>
 									{% if cart_items %}
 									<div id="menu-item-list-6272" class="menu-itam-list">
 										
 										<ul>
 											{% for item  in cart_items %}
-											<li>
+											<li id="cart-item-{{item.id}}">
 												<div class="image-holder"> <a href="assets/extra-images/cover-photo12-1024x187.jpg"><img src="assets/extra-images/cover-photo12-150x150.jpg" alt=""></a></div>
 												<div class="text-holder">
 													<h6>{{item.fooditem.food_title}}</h6>
@@ -29,18 +36,16 @@
 												</div>
 												<div class="price-holder">
 													<span class="price">$ {{item.fooditem.price}}</span>
-													<a href="#" class="decrease_cart" id="{{item.fooditem.id}}" data-url="{% url "decrease_cart" item.fooditem.id %}" data-id="{{item.fooditem.id}}"><i class="icon-minus text-color"></i></a>
+													<a href="#" class="decrease_cart" id="{{item.id}}" data-url="{% url "decrease_cart" item.fooditem.id %}" data-id="{{item.fooditem.id}}"><i class="icon-minus text-color"></i></a>
 													<label id='qty-{{item.fooditem.id}}'>0</label>
 													<a href="#" class="add_to_cart" data-url="{% url "add_to_cart" item.fooditem.id %}" data-id="{{item.fooditem.id}}"><i class="icon-plus4 text-color"></i></a>
 													<span id="add-menu-loader-10"></span>
-                                                    <a href="#" class="delete_cart" data-url="{% url "delete_cart" item.fooditem.id %}" data-id="{{item.fooditem.id}}"><i class="icon-delete text-color"></i></a>
+                                                    <a href="#" class="delete_cart" data-url="{% url "delete_cart" item.id %}" data-id="{{item.id}}"><i class="icon-delete text-color"></i></a>
 												</div>
 											</li>
 											{% endfor %}
-                                    {% else %}
-                                            <li>
-                                                <h1>Cart Empty</h1>
-                                            </li>
+											{% else %}
+											<h1 class="text-center">Cart Empty</h1>
 										</ul>
 									</div>
                                     {% endif %}
@@ -54,6 +59,31 @@
 					</div>
 				</div>
 				
+				<div class="col-lg-3 col-md-3 col-sm-8 col-xs-12">
+					<div class="tabs-holder">
+						<ul class="stickynav-tabs nav nav-tabs">
+							<li class="active"><a data-toggle="tab" href="#home"><i class="icon- icon-room_service"></i>Total</a></li>
+							
+						</ul>
+						<div class="tab-content">
+							<div id="home" class="tab-pane in active">
+								<div class="menu-itam-holder">
+									<div id="menu-item-list-6272" class="menu-itam-list">
+										
+										<ul>
+											<li>
+												<label id="subtotal">0</label>
+												<label id="tax">0</label>
+												<label id="grand_total">0</label>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
