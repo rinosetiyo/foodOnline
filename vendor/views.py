@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from accounts.models import UserProfile
-from vendor.models import Vendor, Category, FoodItem
+from vendor.models import Vendor, Category, FoodItem, OpeningHour
 from accounts.forms import UserProfileForm
 from vendor.forms import VendorForm, CategoryForm, FoodItemForm
 from django.contrib import messages
@@ -139,3 +139,16 @@ def delete_fooditem(request, pk=None):
     fooditem.delete()
     messages.success(request, 'fooditem has been deleted successfully')
     return redirect('menu_builder')
+
+def opening_hours(request):
+    opening_hours = OpeningHour.objects.filter(vendor=get_vendor(request))
+    form = OpeningHourForm()
+    context = {
+        'form':form,
+        'opening_hours': opening_hours
+    }
+    return render(request, 'vendor.html', context)
+
+def add_opening_hours(request):
+    if request.user.is_authenticated:
+        

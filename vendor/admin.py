@@ -1,5 +1,5 @@
 from django.contrib import admin
-from vendor.models import Vendor, Category, FoodItem, Cart
+from vendor.models import Vendor, Category, FoodItem, Cart, OpeningHour
 from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
@@ -18,7 +18,11 @@ class FoodItemAdmin(admin.ModelAdmin):
 class CartAdmin(admin.ModelAdmin):
     list_display = ('user','fooditem','quantity', 'updated_at')
 
+class OpeningHourAdmin(admin.ModelAdmin):
+    list_display = ('vendor', 'day', 'from_hour', 'to_hour')
+
 admin.site.register(Vendor, CustomVendorAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(FoodItem, FoodItemAdmin)
 admin.site.register(Cart, CartAdmin)
+admin.site.register(OpeningHour, OpeningHourAdmin)
