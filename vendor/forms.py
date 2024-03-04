@@ -1,5 +1,5 @@
 from django import forms
-from vendor.models import Vendor, Category, FoodItem
+from vendor.models import Vendor, Category, FoodItem, OpeningHour
 from vendor.validators import allow_only_images_validator
 
 
@@ -19,3 +19,7 @@ class FoodItemForm(forms.ModelForm):
         model = FoodItem
         fields = ['category', 'food_title', 'description', 'price', 'image', 'is_available'] 
 
+class OpeningHourForm(forms.ModelForm):
+    class Meta:
+        model = OpeningHour
+        fields = ['day', 'from_hour', 'to_hour', 'is_closed']
