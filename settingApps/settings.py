@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'app',
     'accounts',
     'vendor',
+    'customer',
+    'order',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +71,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'app.context_processors.get_cart_count',
                 'app.context_processors.get_cart_amount',
+                'accounts.context_processors.get_paypal_client_id',
             ],
         },
     },
@@ -162,3 +165,6 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Food Online Platform'
+
+PAYPAL_CLIENT_ID = config('PAYPAL_CLIENT_ID')
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
